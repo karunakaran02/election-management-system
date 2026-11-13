@@ -1,1 +1,1 @@
-web: uvicorn polling.main:app --host 0.0.0.0 --port ${PORT:-8000}
+web: uvicorn polling.main:app --app-dir src --host 0.0.0.0 --port ${PORT:-8000}
