@@ -13,9 +13,15 @@ class Base(DeclarativeBase):
     pass
 
 
+connect_args = {}
+if "asyncpg" in core.database_url:
+    # Required for connection poolers (e.g. Supabase Supavisor / PgBouncer)
+    connect_args["statement_cache_size"] = 0
+
 engine = create_async_engine(
     core.database_url,
     pool_pre_ping=True,
+    connect_args=connect_args,
 )
 
 session = async_sessionmaker(
